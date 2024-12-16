@@ -1,0 +1,49 @@
+// allprojects {
+//     repositories {
+//         google()
+//         mavenCentral()
+//     }
+// }
+
+// rootProject.buildDir = "../build"
+// subprojects {
+//     project.buildDir = "${rootProject.buildDir}/${project.name}"
+// }
+// subprojects {
+//     project.evaluationDependsOn(":app")
+// }
+
+// tasks.register("clean", Delete) {
+//     delete rootProject.buildDir
+// }
+// تطبيق إعدادات مشروع Android Gradle
+buildscript {
+    repositories {
+        google() // من أجل الحصول على الأدوات والملفات الخاصة بـ Android
+        mavenCentral() // لتحميل المكتبات
+    }
+    dependencies {
+        // استخدام أحدث إصدار من Android Gradle Plugin المتوافق مع Gradle 8.3
+        classpath 'com.android.tools.build:gradle:8.0.0'  // تأكد من تحديث هذا إلى أحدث إصدار إذا لزم الأمر
+    }
+}
+
+allprojects {
+    repositories {
+        google() // للحصول على المكتبات من Google
+        mavenCentral() // للحصول على المكتبات من Maven Central
+    }
+}
+
+rootProject.buildDir = "../build" // تحديد مجلد البناء للمشروع الجذري
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}" // تحديد مجلد بناء لكل مشروع فرعي
+}
+
+subprojects {
+    project.evaluationDependsOn(":app") // التأكد من أن المشاريع الفرعية تعتمد على مشروع :app
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir // مهمة لتنظيف مجلد البناء الجذري
+}
